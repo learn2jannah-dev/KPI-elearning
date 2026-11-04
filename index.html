@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KPI eLearning — Log Masuk</title>
+  <link rel="icon" type="image/jpeg" href="data/logo_polimas_shj_copy.jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-logo">
+      <img src="data/logo_polimas_shj_copy.jpg" alt="Logo POLIMAS" style="width:80px;height:80px;object-fit:contain;border-radius:50%;margin-bottom:10px;display:block;margin-left:auto;margin-right:auto;background:#fff;padding:4px" />
+      <h1>Sistem Pemantauan KPI eLearning</h1>
+      <p>Sila pilih peranan dan jabatan anda untuk meneruskan</p>
+    </div>
+
+    <form class="login-form" onsubmit="handleLogin(event)">
+      <div class="form-group">
+        <label for="peranan">Peranan</label>
+        <select id="peranan" onchange="toggleJabatan()">
+          <option value="">-- Pilih Peranan --</option>
+          <option value="admin">Admin Pusat</option>
+          <option value="ketua">Ketua Jabatan</option>
+        </select>
+      </div>
+
+      <div class="form-group" id="jabatan-group" style="display:none">
+        <label for="jabatan">Jabatan</label>
+        <select id="jabatan">
+          <option value="">-- Pilih Jabatan --</option>
+        </select>
+      </div>
+
+      <!-- PIN Admin — hanya muncul bila pilih Admin Pusat -->
+      <div class="form-group" id="pin-group" style="display:none">
+        <label for="admin-pin">PIN Admin</label>
+        <input type="password" id="admin-pin" placeholder="Masukkan PIN" autocomplete="off" />
+        <p id="pin-error" style="display:none;color:#f87171;font-size:12px;margin-top:4px">❌ PIN tidak sah. Cuba semula.</p>
+      </div>
+
+      <button type="submit" class="btn-login">Masuk ke Dashboard</button>
+    </form>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    const ADMIN_PIN = (function() { return 'P\x40ssword1'; })();
+
+    // Isi dropdown jabatan daripada data yang disematkan
+    window.addEventListener('DOMContentLoaded', () => {
+      const data = getInlineData();
+      const sel = document.getElementById('jabatan');
+      data.jabatan.forEach(j => {
+        const opt = document.createElement('option');
+        opt.value = j.id;
+        opt.textContent = j.nama;
+        sel.appendChild(opt);
+      });
+    });
+
+    function toggleJabatan() {
+      const peranan = document.getElementById('peranan').value;
+      document.getElementById('jabatan-group').style.display =
+        peranan === 'ketua' ? 'block' : 'none';
+      document.getElementById('pin-group').style.display =
+        peranan === 'admin' ? 'block' : 'none';
+      // Clear PIN & error bila tukar peranan
+      document.getElementById('admin-pin').value = '';
+      document.getElementById('pin-error').style.display = 'none';
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const peranan = document.getElementById('peranan').value;
+      const jabatan = document.getElementById('jabatan').value;
+
+      if (!peranan) { alert('Sila pilih peranan.'); return; }
+      if (peranan === 'ketua' && !jabatan) { alert('Sila pilih jabatan.'); return; }
+
+      // Semak PIN untuk Admin
+      if (peranan === 'admin') {
+        const pin = document.getElementById('admin-pin').value;
+        const errEl = document.getElementById('pin-error');
+        if (pin !== ADMIN_PIN) {
+          errEl.style.display = 'block';
+          document.getElementById('admin-pin').focus();
+          return;
+        }
+        errEl.style.display = 'none';
+      }
+
+      sessionStorage.setItem('peranan', peranan);
+      sessionStorage.setItem('jabatan', jabatan);
+      sessionStorage.setItem('sukuan', 'Q1');
+      window.location.href = 'dashboard.html';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard KPI eLearning</title>
+  <link rel="icon" type="image/jpeg" href="data/logo_polimas_shj_copy.jpg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="data/logo_polimas_shj_copy.jpg" alt="POLIMAS" class="sidebar-logo-img" />
+      <div class="sidebar-title">KPI eLearning<br><span style="font-size:10px;font-weight:400;opacity:.7">POLIMAS</span></div>
+    </div>
+
+    <div class="sidebar-user" id="sidebar-user">
+      <!-- diisi oleh JS -->
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">NAVIGASI</div>
+      <a href="#" class="nav-item nav-home active" onclick="showSection('home', this)">
+        <span class="nav-icon">🏠</span> <span>Utama</span>
+      </a>
+      <a href="#" class="nav-item nav-kpi" onclick="showSection('kpi', this)">
+        <span class="nav-icon">📊</span> <span>KPI Jabatan</span>
+      </a>
+      <a href="#" class="nav-item nav-cidos" onclick="showSection('cidos', this)">
+        <span class="nav-icon">🖥️</span> <span>CIDOS</span>
+      </a>
+      <a href="#" class="nav-item nav-pembangun" onclick="showSection('pembangun', this)">
+        <span class="nav-icon">👤</span> <span>Pembangun</span>
+      </a>
+      <a href="#" class="nav-item nav-laporan" onclick="showSection('laporan', this)">
+        <span class="nav-icon">📋</span> <span>Laporan</span>
+      </a>
+
+      <div class="nav-section-label" style="margin-top:16px">SUKUAN</div>
+      <div class="sukuan-tabs" id="sukuan-tabs">
+        <button class="sq-btn" onclick="changeSukuan('Q1')">Q1</button>
+        <button class="sq-btn" onclick="changeSukuan('Q2')">Q2</button>
+        <button class="sq-btn" onclick="changeSukuan('Q3')">Q3</button>
+        <button class="sq-btn" onclick="changeSukuan('Q4')">Q4</button>
+      </div>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button id="btn-reset-year" class="btn-reset-year" onclick="openResetModal()" style="display:none">🔄 Tahun Baru</button>
+      <a href="index.html" class="btn-logout">⬅ Log Keluar</a>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOP HEADER -->
+    <header class="top-header">
+      <div class="header-left">
+        <span id="header-title">Dashboard Utama</span>
+      </div>
+      <div class="header-right">
+        <span id="sync-status" style="display:none;font-size:12px;color:#64748b;background:#f1f5f9;padding:4px 10px;border-radius:20px;border:1px solid #e2e8f0"></span>
+        <button onclick="loadFromSheets()" title="Muat semula data dari Google Sheets" style="background:none;border:1px solid #e2e8f0;border-radius:8px;padding:5px 10px;cursor:pointer;font-size:13px;color:#64748b" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='none'">🔄</button>
+        <select id="tahun-select" onchange="changeViewTahun(this.value)" title="Pilih tahun untuk paparan" style="display:none;font-size:13px;font-weight:700;color:#1e293b;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:8px;padding:5px 10px;cursor:pointer;outline:none"></select>
+        <span class="header-badge" id="header-sukuan">Q3 2025</span>
+        <span id="header-jabatan"></span>
+      </div>
+    </header>
+
+    <!-- SECTION: HOME -->
+    <section class="content-section active" id="section-home">
+      <!-- Greeting banner -->
+      <div class="greeting-bar" id="greeting-bar">
+        <div>
+          <h2 id="greeting-text">Selamat datang 👋</h2>
+          <p id="home-subtitle" class="text-muted"></p>
+        </div>
+        <div class="greeting-time" id="greeting-time"></div>
+      </div>
+
+      <!-- Alert banner (jabatan di bawah sasaran) -->
+      <div id="alert-banner" style="display:none"></div>
+
+      <!-- Notifikasi item belum dikemaskini -->
+      <div id="notif-banner" style="display:none"></div>
+
+      <!-- 5 KPI Summary Cards -->
+      <div class="kpi-cards" id="kpi-cards-home">
+        <!-- diisi oleh JS -->
+      </div>
+
+      <!-- Admin: Chart + Heatmap | Ketua: Chart + Progress -->
+      <div id="home-extra"></div>
+    </section>
+
+    <!-- SECTION: KPI JABATAN -->
+    <section class="content-section" id="section-kpi">
+      <div class="section-heading">
+        <h2>KPI Per Item</h2>
+        <p class="text-muted">Pencapaian setiap item pembelajaran mengikut sukuan</p>
+      </div>
+      <div id="kpi-detail-content"></div>
+    </section>
+
+    <!-- SECTION: CIDOS -->
+    <section class="content-section" id="section-cidos">
+      <div class="section-heading">
+        <h2>Pemantauan CIDOS</h2>
+        <p class="text-muted">Isytiharan kursus dibuka dan pencapaian Blended Learning</p>
+      </div>
+      <div id="cidos-content"></div>
+    </section>
+
+    <!-- SECTION: PEMBANGUN -->
+    <section class="content-section" id="section-pembangun">
+      <div class="section-heading">
+        <h2>Senarai Pembangun</h2>
+        <p class="text-muted">Status pembangunan item eLearning per pembangun</p>
+      </div>
+      <div id="pembangun-content"></div>
+    </section>
+
+    <!-- SECTION: LAPORAN -->
+    <section class="content-section" id="section-laporan">
+      <div class="section-heading">
+        <h2>Laporan KPI</h2>
+        <p class="text-muted">Ringkasan laporan untuk dicetak atau dieksport</p>
+      </div>
+      <div id="laporan-content"></div>
+    </section>
+
+  </main>
+
+  <!-- MODAL: Reset + Tahun Baru -->
+  <div class="modal-overlay" id="modal-reset" onclick="closeModal('modal-reset')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3>🔄 Mulakan Tahun Baru</h3>
+        <button class="modal-close" onclick="closeModal('modal-reset')">✕</button>
+      </div>
+      <div style="margin-bottom:18px;padding:14px;background:#fff7ed;border:1px solid #fed7aa;border-radius:10px;font-size:13px;color:#92400e;line-height:1.6">
+        ⚠️ <strong>Amaran:</strong> Semua nilai KPI dan CIDOS bagi tahun <strong id="reset-old-year"></strong> akan <strong>dikosongkan</strong>.<br>
+        Data semasa akan <strong>dieksport sebagai JSON</strong> secara automatik sebelum reset.
+      </div>
+      <div class="form-group" style="margin-bottom:18px">
+        <label style="color:#475569;font-size:13px;font-weight:600">Tahun Baru</label>
+        <input type="number" id="reset-new-year" min="2020" max="2099" style="background:#f8fafc;border:1px solid #e2e8f0;color:#1e293b;padding:10px 14px;border-radius:10px;font-size:14px;width:100%" />
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button type="button" class="btn-secondary" onclick="closeModal('modal-reset')">Batal</button>
+        <button type="button" class="btn-danger" onclick="confirmReset()">⬇ Eksport &amp; Reset</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Tambah Platform CIDOS -->
+  <div class="modal-overlay" id="modal-cidos" onclick="closeModal('modal-cidos')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-cidos-title">Kemaskini Platform CIDOS</h3>
+        <button class="modal-close" onclick="closeModal('modal-cidos')">✕</button>
+      </div>
+      <form onsubmit="saveCidos(event)">
+        <div class="form-group">
+          <label>Nama Jabatan</label>
+          <input type="text" id="mc-jabatan" readonly style="background:#f4f6f9;color:#64748b" />
+        </div>
+        <div class="form-group">
+          <label>Sukuan</label>
+          <input type="text" id="mc-sukuan" readonly style="background:#f4f6f9;color:#64748b" />
+        </div>
+        <div class="form-group">
+          <label>Bilangan Platform Didaftarkan <span style="color:#64748b;font-weight:400">(keseluruhan jabatan)</span></label>
+          <input type="number" id="mc-platform" min="0" required placeholder="cth. 10" />
+        </div>
+        <div class="form-group">
+          <label>Platform Blended <span style="color:#64748b;font-weight:400" id="mc-blended-label">(untuk sukuan ini)</span></label>
+          <input type="number" id="mc-blended" min="0" placeholder="cth. 7" />
+        </div>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:16px">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-cidos')">Batal</button>
+          <button type="submit" class="btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: Kemaskini Nilai KPI (pen edit) -->
+  <div class="modal-overlay" id="modal-kpi-edit" onclick="closeModal('modal-kpi-edit')">
+    <div class="modal-box" onclick="event.stopPropagation()" style="max-width:360px">
+      <div class="modal-header">
+        <h3 id="modal-kpi-edit-title">Kemaskini Pencapaian</h3>
+        <button class="modal-close" onclick="closeModal('modal-kpi-edit')">✕</button>
+      </div>
+      <div class="form-group" style="margin-bottom:6px">
+        <label style="color:#475569;font-size:12px;font-weight:600">Item</label>
+        <input type="text" id="ke-item" readonly style="background:#f8fafc;border:1px solid #e2e8f0;color:#64748b;padding:8px 12px;border-radius:8px;font-size:13px;width:100%" />
+      </div>
+      <div class="form-group" style="margin-bottom:6px">
+        <label style="color:#475569;font-size:12px;font-weight:600">Sukuan</label>
+        <input type="text" id="ke-sukuan" readonly style="background:#f8fafc;border:1px solid #e2e8f0;color:#64748b;padding:8px 12px;border-radius:8px;font-size:13px;width:100%" />
+      </div>
+      <div class="form-group" style="margin-bottom:18px">
+        <label style="color:#475569;font-size:13px;font-weight:600">Pencapaian (%)</label>
+        <input type="number" id="ke-nilai" min="0" max="100" placeholder="0 – 100" style="background:#f8fafc;border:1px solid #e2e8f0;color:#1e293b;padding:10px 14px;border-radius:10px;font-size:20px;font-weight:700;width:100%;text-align:center" />
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end">
+        <button type="button" class="btn-secondary" onclick="closeModal('modal-kpi-edit')">Batal</button>
+        <button type="button" class="btn-primary" onclick="saveKpiEdit()">💾 Simpan</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Tambah Bahan Digital -->
+  <div class="modal-overlay" id="modal-bahan" onclick="closeModal('modal-bahan')">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-bahan-title">Tambah Bahan Digital</h3>
+        <button class="modal-close" onclick="closeModal('modal-bahan')">✕</button>
+      </div>
+      <form onsubmit="saveBahan(event)">
+        <div class="form-group">
+          <label>Tajuk</label>
+          <input type="text" id="mb-tajuk" required placeholder="cth. Modul Asas AI 2025" />
+        </div>
+        <div class="form-group">
+          <label>Nama Pembangun</label>
+          <input type="text" id="mb-pembangun" required placeholder="cth. Ahmad Razif" />
+        </div>
+        <div class="form-group">
+          <label>Pencapaian Q1 (%)</label>
+          <input type="number" id="mb-q1" min="0" max="100" value="0" />
+        </div>
+        <div class="form-group">
+          <label>Pencapaian Q2 (%)</label>
+          <input type="number" id="mb-q2" min="0" max="100" value="0" />
+        </div>
+        <div class="form-group">
+          <label>Pencapaian Q3 (%)</label>
+          <input type="number" id="mb-q3" min="0" max="100" value="0" />
+        </div>
+        <div class="form-group">
+          <label>Pencapaian Q4 (%)</label>
+          <input type="number" id="mb-q4" min="0" max="100" value="0" />
+        </div>
+        <div style="display:flex; gap:8px; justify-content:flex-end; margin-top:16px">
+          <button type="button" class="btn-secondary" onclick="closeModal('modal-bahan')">Batal</button>
+          <button type="submit" class="btn-primary">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
