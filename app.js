@@ -652,6 +652,8 @@ function deleteKpiStandard(jabId, key) {
 
   renderKpi();
   renderHome();
+  renderPembangun();
+  renderLaporan();
   showToast(`🗑️ Item "${tajuk}" dipadamkan.`);
 }
 
@@ -666,6 +668,8 @@ function deleteKpiExtra(jabId, exIdx) {
 
   renderKpi();
   renderHome();
+  renderPembangun();
+  renderLaporan();
   showToast(`🗑️ Bahan "${tajuk}" dipadamkan.`);
 }
 
@@ -757,8 +761,44 @@ function renderPembangun() {
   jabList.forEach(jab => {
     if (!jab.pembangun) return;
 
-    // Paparan kosong selepas reset tahun baru
-    if (jab.pembangun.length === 0) {
+    // Kumpulkan semua item (standard + extra) per pembangun
+    // Map: pembangun_id → [ { label, tajuk, kpiObj/ex, isExtra } ]
+    const pbMap = {};
+
+    // Item KPI standard
+    Object.keys(ITEM_META).forEach(key => {
+      const kpiObj = jab.kpi[key];
+      if (!kpiObj.tajuk || !kpiObj.pembangun_id) return;
+      if (!pbMap[kpiObj.pembangun_id]) pbMap[kpiObj.pembangun_id] = [];
+      pbMap[kpiObj.pembangun_id].push({
+        label: `${ITEM_META[key].icon} ${ITEM_META[key].label}`,
+        tajuk: kpiObj.tajuk,
+        vals:  ['Q1','Q2','Q3','Q4'].map(sq => ({ sq, v: getKpiValue(kpiObj, sq), sasaran: THRESHOLDS[key] })),
+        sasaran: THRESHOLDS[key]
+      });
+    });
+
+    // Item bahan digital tambahan (kpi_extra)
+    (jab.kpi_extra || []).forEach(ex => {
+      if (!ex.pembangun_id) return;
+      const m = ITEM_META[ex.item] || { icon: '📄', label: ex.item };
+      if (!pbMap[ex.pembangun_id]) pbMap[ex.pembangun_id] = [];
+      pbMap[ex.pembangun_id].push({
+        label: `${m.icon} ${m.label} ${badgeHtml('green','Baharu')}`,
+        tajuk: ex.tajuk,
+        vals:  ['Q1','Q2','Q3','Q4'].map(sq => ({ sq, v: ex[sq]||0, sasaran: ex.sasaran })),
+        sasaran: ex.sasaran
+      });
+    });
+
+    // Bina senarai pembangun — gabungkan dari kpi standard + kpi_extra
+    const allPbIds = [...new Set([
+      ...jab.pembangun.map(p => p.id),
+      ...Object.keys(pbMap)
+    ])];
+
+    // Paparan kosong jika tiada pembangun langsung
+    if (allPbIds.length === 0 || Object.keys(pbMap).length === 0) {
       html += `<div class="card-box mb-24">
         <h3 style="font-size:15px;font-weight:700;margin-bottom:10px;color:#1e293b">🏢 ${jab.nama}</h3>
         <p style="color:#94a3b8;font-size:13px;text-align:center;padding:24px 0">
@@ -768,24 +808,24 @@ function renderPembangun() {
       return;
     }
 
-    const rows = jab.pembangun.map(pb => {
-      const items = Object.keys(ITEM_META).filter(k => jab.kpi[k].pembangun_id === pb.id);
+    const rows = allPbIds.map(pbId => {
+      const pb = jab.pembangun.find(p => p.id === pbId);
+      const pbNama = pb ? pb.nama : pbId;
+      const items = pbMap[pbId] || [];
       if (items.length === 0) return '';
 
-      return items.map((key, i) => {
-        const kpiObj = jab.kpi[key];
-        const cells = ['Q1','Q2','Q3','Q4'].map(sq => {
-          const v = getKpiValue(kpiObj, sq);
-          const cls = statusClass(v, THRESHOLDS[key]);
+      return items.map((it, i) => {
+        const cells = it.vals.map(({ v, sasaran }) => {
+          const cls = statusClass(v, sasaran);
           return `<td class="text-center">${v > 0 ? badgeHtml(cls, v+'%') : badgeHtml('grey','—')}</td>`;
         }).join('');
-        const avg = avgAllSukuan(kpiObj);
-        const avgCls = statusClass(avg, THRESHOLDS[key]);
-        const sCls = avg >= THRESHOLDS[key] ? 'green' : avg >= THRESHOLDS[key]-10 ? 'yellow' : avg > 0 ? 'red' : 'grey';
+        const vArr = it.vals.map(x => x.v).filter(v => v > 0);
+        const avg = vArr.length ? Math.round(vArr.reduce((a,b)=>a+b,0)/vArr.length) : 0;
+        const avgCls = statusClass(avg, it.sasaran);
         return `<tr>
-          ${i === 0 ? `<td rowspan="${items.length}" style="font-weight:700;vertical-align:top;padding-top:14px">${pb.nama}</td>` : ''}
-          <td>${ITEM_META[key].icon} ${ITEM_META[key].label}</td>
-          <td style="font-size:12px;color:#64748b">${kpiObj.tajuk}</td>
+          ${i === 0 ? `<td rowspan="${items.length}" style="font-weight:700;vertical-align:top;padding-top:14px">${pbNama}</td>` : ''}
+          <td>${it.label}</td>
+          <td style="font-size:12px;color:#64748b">${it.tajuk}</td>
           ${cells}
           <td class="text-center">${avg > 0 ? badgeHtml(avgCls, avg+'%') : '—'}</td>
         </tr>`;
@@ -1164,6 +1204,8 @@ function saveKpiEdit() {
   closeModal('modal-kpi-edit');
   renderKpi();
   renderHome();
+  renderPembangun();
+  renderLaporan();
 
   // Auto-sync ke Google Sheets
   if (keExIdx !== null) {
@@ -1256,6 +1298,9 @@ function saveCidos(e) {
   closeModal('modal-cidos');
   renderCidos();
   renderHome();
+  renderKpi();
+  renderPembangun();
+  renderLaporan();
 
   // Auto-sync ke Google Sheets
   const platform = jab.cidos_platform || 0;
@@ -1315,6 +1360,9 @@ function saveBahan(e) {
 
   closeModal('modal-bahan');
   renderKpi();
+  renderHome();
+  renderPembangun();
+  renderLaporan();
 
   // Auto-sync ke Google Sheets
   syncToSheets('saveBahan', {
