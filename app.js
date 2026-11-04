@@ -35,7 +35,7 @@ function getInlineData() {
       makeJab("jab-perd", "Jabatan Perdagangan"),
       makeJab("jab-tmk",  "Jabatan Teknologi Maklumat dan Komunikasi"),
       makeJab("jab-pa",   "Jabatan Pengajian Am"),
-      makeJab("jab-msk",  "Jabatan Matematik, Sains dan Kejuruteraan")
+      makeJab("jab-msk",  "Jabatan Matematik, Sains dan Komputer")
     ]
   };
 }
