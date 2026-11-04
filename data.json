@@ -1,0 +1,147 @@
+{
+  "tahun": 2025,
+  "jabatan": [
+    {
+      "id": "jab-jee",
+      "nama": "Jabatan Kejuruteraan Elektrik",
+      "pembangun": [
+        { "id": "p1", "nama": "Mohd Hazwan" },
+        { "id": "p2", "nama": "Nurul Ain" },
+        { "id": "p3", "nama": "Fadzlan Ishak" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p1", "tajuk": "Pengenalan Pembangunan Profesional Digital", "sasaran": 80, "Q1": 85, "Q2": 70, "Q3": 78, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p1", "tajuk": "Asas Kecerdasan Buatan untuk Staf", "sasaran": 70, "Q1": 65, "Q2": 80, "Q3": 72, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p2", "tajuk": "Panduan Digital Workplace Elektrik", "sasaran": 60, "Q1": 90, "Q2": 88, "Q3": 60, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p3", "tajuk": "Sijil Kecekapan Sistem Elektrik", "sasaran": 50, "Q1": 40, "Q2": 55, "Q3": 80, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 8, "kursus_blended": 6, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 10, "kursus_blended": 7, "peratus_blended": 70, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 12, "kursus_blended": 9, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    },
+    {
+      "id": "jab-jea",
+      "nama": "Jabatan Kejuruteraan Awam",
+      "pembangun": [
+        { "id": "p4", "nama": "Rozaini Md Nor" },
+        { "id": "p5", "nama": "Khairul Anuar" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p4", "tajuk": "Teknik Pembinaan & Struktur Awam", "sasaran": 80, "Q1": 72, "Q2": 80, "Q3": 85, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p4", "tajuk": "AI dalam Reka Bentuk Kejuruteraan", "sasaran": 70, "Q1": 55, "Q2": 65, "Q3": 75, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p5", "tajuk": "Panduan Ukur Kejuruteraan Awam", "sasaran": 60, "Q1": 80, "Q2": 78, "Q3": 82, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p5", "tajuk": "Sijil Pengurusan Projek Awam", "sasaran": 50, "Q1": 50, "Q2": 60, "Q3": 68, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 7, "kursus_blended": 5, "peratus_blended": 71, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 8, "kursus_blended": 6, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 9, "kursus_blended": 7, "peratus_blended": 78, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    },
+    {
+      "id": "jab-jem",
+      "nama": "Jabatan Kejuruteraan Mekanikal",
+      "pembangun": [
+        { "id": "p6", "nama": "Shahrul Nizam" },
+        { "id": "p7", "nama": "Amirah Zulkefli" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p6", "tajuk": "Asas Kejuruteraan Mekanikal Digital", "sasaran": 80, "Q1": 68, "Q2": 75, "Q3": 80, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p6", "tajuk": "Automasi & AI dalam Pembuatan", "sasaran": 70, "Q1": 60, "Q2": 70, "Q3": 75, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p7", "tajuk": "Panduan CAD/CAM Kejuruteraan", "sasaran": 60, "Q1": 75, "Q2": 80, "Q3": 85, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p7", "tajuk": "Sijil Sistem Pneumatik & Hidraulik", "sasaran": 50, "Q1": 45, "Q2": 58, "Q3": 70, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 6, "kursus_blended": 4, "peratus_blended": 67, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 8, "kursus_blended": 6, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 10, "kursus_blended": 7, "peratus_blended": 70, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    },
+    {
+      "id": "jab-perd",
+      "nama": "Jabatan Perdagangan",
+      "pembangun": [
+        { "id": "p8", "nama": "Norzaharah Hashim" },
+        { "id": "p9", "nama": "Hafizuddin Ramli" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p8", "tajuk": "Pemasaran Digital & E-Dagang", "sasaran": 80, "Q1": 78, "Q2": 82, "Q3": 88, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p8", "tajuk": "AI dalam Analisis Perniagaan", "sasaran": 70, "Q1": 65, "Q2": 72, "Q3": 78, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p9", "tajuk": "Panduan Keusahawanan Digital", "sasaran": 60, "Q1": 85, "Q2": 88, "Q3": 90, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p9", "tajuk": "Sijil Perakaunan Perniagaan", "sasaran": 50, "Q1": 55, "Q2": 65, "Q3": 72, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 8, "kursus_blended": 6, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 9, "kursus_blended": 7, "peratus_blended": 78, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 11, "kursus_blended": 8, "peratus_blended": 73, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    },
+    {
+      "id": "jab-tmk",
+      "nama": "Jabatan Teknologi Maklumat dan Komunikasi",
+      "pembangun": [
+        { "id": "p10", "nama": "Azrul Hafizi" },
+        { "id": "p11", "nama": "Siti Hajar Md Isa" },
+        { "id": "p12", "nama": "Ridhwan Taib" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p10", "tajuk": "Pembangunan Profesional ICT", "sasaran": 80, "Q1": 85, "Q2": 88, "Q3": 90, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p10", "tajuk": "Pembelajaran Mesin & AI Gunaan", "sasaran": 70, "Q1": 75, "Q2": 80, "Q3": 85, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p11", "tajuk": "Panduan Keselamatan Siber Peringkat 1", "sasaran": 60, "Q1": 88, "Q2": 90, "Q3": 92, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p12", "tajuk": "Sijil Pengaturcaraan Python", "sasaran": 50, "Q1": 70, "Q2": 75, "Q3": 80, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 10, "kursus_blended": 8, "peratus_blended": 80, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 12, "kursus_blended": 9, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 14, "kursus_blended": 11, "peratus_blended": 79, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    },
+    {
+      "id": "jab-pa",
+      "nama": "Jabatan Pengajian Am",
+      "pembangun": [
+        { "id": "p13", "nama": "Wan Norashikin" },
+        { "id": "p14", "nama": "Zamri Abdul Rahim" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p13", "tajuk": "Kemahiran Komunikasi Profesional", "sasaran": 80, "Q1": 80, "Q2": 83, "Q3": 87, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p13", "tajuk": "Penulisan Akademik Berbantukan AI", "sasaran": 70, "Q1": 62, "Q2": 70, "Q3": 74, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p14", "tajuk": "Panduan Bahasa Inggeris Teknikal", "sasaran": 60, "Q1": 78, "Q2": 80, "Q3": 83, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p14", "tajuk": "Sijil Kemahiran Insaniah", "sasaran": 50, "Q1": 60, "Q2": 65, "Q3": 70, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 7, "kursus_blended": 5, "peratus_blended": 71, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 8, "kursus_blended": 6, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 9, "kursus_blended": 7, "peratus_blended": 78, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    },
+    {
+      "id": "jab-msk",
+      "nama": "Jabatan Matematik, Sains dan Kejuruteraan",
+      "pembangun": [
+        { "id": "p15", "nama": "Dr. Norhaslinda Zainal" },
+        { "id": "p16", "nama": "Fauzi Md Zain" }
+      ],
+      "kpi": {
+        "video_pdp": { "pembangun_id": "p15", "tajuk": "Matematik Gunaan dalam Industri", "sasaran": 80, "Q1": 75, "Q2": 80, "Q3": 83, "Q4": 0 },
+        "video_ai":  { "pembangun_id": "p15", "tajuk": "Statistik & Data Sains Asas", "sasaran": 70, "Q1": 70, "Q2": 75, "Q3": 78, "Q4": 0 },
+        "ebook":     { "pembangun_id": "p16", "tajuk": "Panduan Fizik & Kimia Gunaan", "sasaran": 60, "Q1": 82, "Q2": 85, "Q3": 88, "Q4": 0 },
+        "microcredential": { "pembangun_id": "p16", "tajuk": "Sijil Analisis Data Saintifik", "sasaran": 50, "Q1": 55, "Q2": 62, "Q3": 68, "Q4": 0 }
+      },
+      "cidos": {
+        "Q1": { "kursus_dibuka": 8, "kursus_blended": 6, "peratus_blended": 75, "senarai_kursus": [] },
+        "Q2": { "kursus_dibuka": 9, "kursus_blended": 7, "peratus_blended": 78, "senarai_kursus": [] },
+        "Q3": { "kursus_dibuka": 10, "kursus_blended": 8, "peratus_blended": 80, "senarai_kursus": [] },
+        "Q4": { "kursus_dibuka": 0, "kursus_blended": 0, "peratus_blended": 0, "senarai_kursus": [] }
+      }
+    }
+  ]
+}
